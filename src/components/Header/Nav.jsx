@@ -1,70 +1,32 @@
 
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { PiCaretDown } from "react-icons/pi";
+import { MdOutlineRealEstateAgent } from "react-icons/md";
+import Filter from '../Filter/Filter';
+
 import './nav.css';
-import { Link } from 'react-router-dom';
-
-import { GetMovieContext } from '../context/myContext';
 function Nav() {
-
-  const data = GetMovieContext();
-  const { favourite, handleInput, movieName } = data;
-  console.log(favourite)
-
+  const navigate = useNavigate();
   return (
     <>
-      <div className='navbar'>
-        <div className="logo">
-          <h6 style={{ color: "orange" }}>
-            <Link to="/">House Hub</Link></h6>
-        </div>
-        <div>
-          <ul>
-            <li ><Link to="/">Home</Link></li>
-            <li>
-              <Link to="/favourite">Favourites</Link>
-              <small className="favourite-counter">
-                {/* {favourite.length } */}
-              </small>
-            </li>
-            <li><input type="text" value={movieName} placeholder="Search Movies..." onChange={(e) => handleInput(e.target.value)} /></li>
+      <div className='navbar flex'>
+        <div className="logo flex">
+          <Link to="/"><MdOutlineRealEstateAgent style={{ fill: "#6F65EB", textDecoration: "none" }} /> Estatery</Link>
+          <ul className='list-items'>
+            <li className='active' ><Link to="/">Rent</Link></li>
+            <li>Buy</li>
+            <li>Sell</li>
+            <li>ManageProperty <span><PiCaretDown /></span></li>
+            <li>Resources <span><PiCaretDown /></span></li>
           </ul>
         </div>
+        <div className="btns nav-btn flex_1">
+          <button className='btn' onClick={() => navigate("/favourite")}>Favourite</button>
+          <button className='btn' style={{ background: "#6f65eb", color: "#fff" }}>Login</button>
+        </div>
       </div>
-
-      <div className="bottom-navbar">
-        <form className='flex'>
-          <div>
-            <label htmlFor="city">City</label>
-            <input type="text" placeholder='Enter City' />
-          </div>
-
-          <div>
-            <label htmlFor="data">Date</label>
-            <input type="date" placeholder='Enter Date' />
-          </div>
-
-          <div>
-            <label htmlFor="price">Price</label>
-            <input type="text" placeholder='Enter Price' />
-          </div>
-
-          <div>
-            <label htmlFor="property-type">Property Type</label>
-            <select>
-              <option value="house">House</option>
-              <option value="pg">Pg</option>
-              <option value="villa">Villa</option>
-              <option value="hotel">Hotel</option>
-              <option value="oyo">Oyo</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="submit"></label>
-            <button type='submit'>Submit</button>
-          </div>
-        </form>
-      </div>
+      <Filter />
     </>
   )
 }

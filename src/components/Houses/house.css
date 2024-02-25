@@ -1,0 +1,70 @@
+.houseList {
+  max-width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px;
+}
+
+.house {
+  width: 250px;
+  flex-direction: column;
+  border: 1px solid #6f65eb;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden;
+}
+.house * {
+  margin: 0;
+  padding-top: 0;
+}
+
+.title p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.details {
+  background: #fff;
+  font-size: 12px;
+}
+
+.title,
+.details {
+  margin: 0;
+  padding: 10px 10px 0 10px;
+  padding-bottom: 10px;
+}
+
+.house img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: 0.4s ease;
+  cursor: pointer;
+}
+
+.house:hover img {
+  transform: scale(1.1);
+}
+
+.flex_1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media screen and (max-width: 650px) {
+  .house {
+    width: 220px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .house {
+    width: 100%;
+  }
+}

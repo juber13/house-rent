@@ -1,23 +1,41 @@
 import React from 'react';
-import './Favourite.css'
-
 import { GetMovieContext } from '../context/myContext';
+import { CiHeart } from "react-icons/ci";
+
 
 const Favourites = () => {
   const data = GetMovieContext();
   const { favourite, removeFavourite } = data;
   return (
     <>
-      <div className="moviesList">
-        {favourite.length > 0 ? favourite.map((movie, index) => {
-          console.log(movie);
+      <div className="houseList">
+        {!favourite.length && <h3>No Favourite List Here!!</h3>}
+        {favourite.map((favo, index) => {
           return (
-            <div className="movie" key={movie.imdbID}>
-              <img src={movie.Poster} alt="movie" />
-              <h3 className='remove' onClick={() => removeFavourite(movie)}>Remove</h3>
-            </div>
+            <>
+              <div className="house" key={index}>
+                <img src={favo.image} alt="movie" />
+                <div className="title">
+                  <div className="house-title flex">
+                    <p>{favo.name}</p>
+                    <small style={{ fontSize: "1.5rem", cursor: "pointer" }} 
+                    onClick={() => removeFavourite(favo)}> <CiHeart /> </small>
+                  </div>
+                  <p>{favo.address}{" "}{favo.city}</p>
+                  <small style={{ color: "green" }}>Price {favo.price}</small>
+                </div>
+
+                <div className="details flex">
+                  <p>Area {favo.info.area}</p>
+                  <p>Bed {favo.info.bed}</p>
+                  <p>favo {favo.info.bathrooms}</p>
+                </div>
+
+              </div>
+            </>
           );
-        }) : <h3 className='empty-message'> Add what you like :<code>{")"}</code></h3>}
+        })}
+
       </div>
     </>
   );

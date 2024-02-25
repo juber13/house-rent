@@ -1,0 +1,87 @@
+.filter-container {
+  width: 85%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filters {
+  background-color: #fff;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filters div {
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0.8rem;
+  border-right: 2px solid #ddd;
+}
+
+.filters div:last-child {
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+input,
+select {
+  padding: 0;
+  width: 100%;
+  border: none;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  padding-top: 1rem;
+}
+
+label {
+  color: #ddd;
+  font-size: 15px;
+}
+
+.filter-btn {
+  background: #6f65eb;
+  color: #fff;
+}
+
+.filter-btn:hover {
+  background: #ddd;
+}
+
+@media screen and (max-width: 700px) {
+  .heading {
+    color: #ddd;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .filters div {
+    width: 100%;
+  }
+
+  .filters div {
+    border-bottom: 1px solid #ddd;
+    border-right: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  .filters div {
+    border-bottom: 1px solid #ddd;
+    border-right: none;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+}
