@@ -1,12 +1,34 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useMemo } from 'react';
 
 
 import { data } from '../../data.js'
 const movieContext = createContext({});
 
 const MyContext = ({ children }) => {
-    const [houses, setHouse] = useState([...data]);
+    const memoizedData = useMemo(() => data, [])
+    const [houses, setHouse] = useState([...memoizedData]);
     const [favourite, setFavourite] = useState([]);
+    const [inputs, setInputs] = useState({ city: "", when: "", price: "", type: "" });
+
+    // filter out 
+
+    const filterData = () => {
+        const { city, price, type, when } = inputs;
+        if (!city || !when || !price || !type) {
+            alert("all fields are required");
+            return;
+        } else {
+            console.log(houses)
+            console.log(city, price, type)
+            const newHouses = houses.filter(house =>
+                house.city.toLowerCase() === city.toLowerCase() ||
+                house.type.toLowerCase() === type.toLowerCase() ||
+                house.price <= Number(price)
+            );
+            setHouse(newHouses);
+        }
+
+    }
 
     const handleFavourite = (movie) => {
         const isFound = favourite.some(item => {
@@ -27,7 +49,7 @@ const MyContext = ({ children }) => {
     }
 
     return (
-        <movieContext.Provider value={{ houses, favourite, setHouse, setFavourite, handleFavourite, removeFavourite }}>
+        <movieContext.Provider value={{ houses, filterData, favourite, setHouse, setFavourite, handleFavourite, removeFavourite, inputs, setInputs }}>
             {children}
         </movieContext.Provider>
     )

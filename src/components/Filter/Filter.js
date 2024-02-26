@@ -1,6 +1,15 @@
 import React from 'react'
 import './filter.css'
+
+import { GetMovieContext } from '../context/myContext'
 const Filter = () => {
+    const state = GetMovieContext();
+    const { inputs, setInputs, filterData } = state;
+    const handleInput = (e) => {
+        const { value, name } = e.target;
+        setInputs({ ...inputs, [name]: value });
+    }
+
     return (
         <div className='filter-container'>
             <div className="heading">
@@ -10,17 +19,18 @@ const Filter = () => {
             <div className="filters">
                 <div>
                     <label htmlFor="location">Location</label>
-                    <input type="text" placeholder='Location' />
+                    <input type="text" placeholder='Location' name='city' onInput={handleInput} />
                 </div>
 
                 <div>
-                    <label htmlFor="date">When</label>
-                    <input type="date" />
+                    <label htmlFor="when">When</label>
+                    <input type="date" onInput={handleInput} name='when' />
                 </div>
 
                 <div>
                     <label htmlFor="price">Price</label>
-                    <select>
+                    <select onInput={handleInput} name='price'>
+                        <option hidden selected value="">options</option>
                         <option value="1000">500 - 1000</option>
                         <option value="2000">1500 - 2000</option>
                         <option value="3000">2000 - 3000</option>
@@ -30,16 +40,19 @@ const Filter = () => {
 
                 <div>
                     <label htmlFor="type">Property Type</label>
-                    <select>
-                        <option value="house">House</option>
-                        <option value="Rent">Rent</option>
-                        <option value="PG">PG</option>
-                        <option value="Hotel">Hotel</option>
+                    <select onInput={handleInput} name='type'>
+                        <option hidden selected value="">options</option>
+                        <option value="all house">All House</option>
+                        <option value="all villa">Villa</option>
+                        <option value="all pg">All PG</option>
+                        <option value="all oyo">Oyo</option>
+                        <option value="all farm-house">Farm House</option>
+                        <option value="all hotel">Hotel</option>
                     </select>
                 </div>
 
                 <div>
-                    <button className='btn filter-btn'>Search</button>
+                    <button className='btn filter-btn' onClick={filterData}>Search</button>
                 </div>
 
             </div>

@@ -14,14 +14,14 @@ const HouseList = () => {
 
   return (
     <div className="houseList" key={id}>
-      {houses.map((house, index) => {
+      {houses?.map((house, index) => {
         return (
           <>
             <div className="house" key={index}>
               <img src={house.image} alt="movie" />
               <div className="title">
                 <div className="house-title flex">
-                  <p>{house.name}</p>
+                  <p>{house.type.slice(3, house.type.length).toUpperCase()}</p>
                   {favourite.some((pro) => pro.name === house.name) ?
                     <small style={{ fontSize: "1rem", cursor: "pointer" }}
                       onClick={() => removeFavourite(house)}>
@@ -34,7 +34,7 @@ const HouseList = () => {
                   }
                 </div>
                 <p className="flex_1"><small><MdOutlineLocationOn /> {" "}{house.address}{" "}{house.city}</small></p>
-                <small style={{ color: "green" }} className="flex_1"><small><MdOutlineCurrencyRupee /></small> {house.price}</small>
+                <small style={{ color: "green" }} className="flex_1"><small><MdOutlineCurrencyRupee /></small> {house.price} / day</small>
               </div>
 
               <div className="details flex">
